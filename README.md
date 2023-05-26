@@ -1,0 +1,1 @@
+Première chose faite : chercher sur openclassroom ce qu'est docker.

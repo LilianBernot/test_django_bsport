@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ".:/app/"
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    stdin_open: true
+    tty: true
+    shm_size: 2g
+    depends_on:
+      - postgres
+
+  postgres:
+    image: mdillon/postgis:11
+    shm_size: 2g
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: api
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
