@@ -1,22 +1,29 @@
 from django.shortcuts import render, redirect
 from .models import Family
-from .forms import FamilyForm
-from .forms import UserCreationForm
+from .forms import FamilyForm, UserCreationForm, ChildFormSet
 
 # Create your views here.
 def family_list(request):
     families = Family.objects.all()
     return render(request, 'family/family_list.html', {'families': families})
 
+
 def family_create(request):
     if request.method == 'POST':
         form = FamilyForm(request.POST)
-        if form.is_valid():
-            form.save()
+        formset = ChildFormSet(request.POST, prefix='children')
+        if form.is_valid() and formset.is_valid():
+            family = form.save()
+            for child_form in formset:
+                child = child_form.cleaned_data.get('child')
+                if child:
+                    family.children.add(child)
             return redirect('family:family_list')
     else:
         form = FamilyForm()
-    return render(request, 'family/family_create.html', {'form': form})
+        formset = ChildFormSet(prefix='children')
+    return render(request, 'family/family_create.html', {'form': form, 'formset': formset})
+
 
 def create_user(request):
     if request.method == 'POST':
