@@ -36,6 +36,7 @@ RUN apt -qq install -y  \
 # Install Python dependencies using pipenv
 RUN pipenv install --ignore-pipfile --system --deploy --dev
 
+# PostgreSQL adapter for Python
 RUN pip install psycopg2
 
 # Clean the image

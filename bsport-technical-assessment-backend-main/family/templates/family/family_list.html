@@ -2,8 +2,8 @@
 <h1>Family List</h1>
 <ul>
     {% for family in families %}
-        <li>Here will appear the families</li>
-        {% comment %} <li>{{ family.user }}, Father: {{ family.father }}, Mother: {{ family.mother }}</li> {% endcomment %}
+        {% comment %} <li>Here will appear the families</li> {% endcomment %}
+        <li>{{ family.user }}, Father: {{ family.father }}, Mother: {{ family.mother }}</li>
     {% empty %}
         <li>No families found.</li>
     {% endfor %}

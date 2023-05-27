@@ -1,4 +1,14 @@
+# cach files
 ./bsport-technical-assessment-backend-main/general/__pycache__/
 ./bsport-technical-assessment-backend-main/user/__pycache__/
 ./bsport-technical-assessment-backend-main/user/migrations/__pycache__/
+
+# docker-desktop i.e. the installations
 docker-desktop-4.19.0-amd64.deb
+
+
+# PostgreSQL
+*.sql
+*.sql.gz
+*.pgsql 
+*.pgdump 
