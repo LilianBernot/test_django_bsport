@@ -1,0 +1,10 @@
+<!-- family_list.html -->
+<h1>Family List</h1>
+<ul>
+    {% for family in families %}
+        <li>Here will appear the families</li>
+        {% comment %} <li>{{ family.user }}, Father: {{ family.father }}, Mother: {{ family.mother }}</li> {% endcomment %}
+    {% empty %}
+        <li>No families found.</li>
+    {% endfor %}
+</ul>
