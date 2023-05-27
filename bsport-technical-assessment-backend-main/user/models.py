@@ -55,4 +55,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = MyUserManager()
 
+    # unique identifier for authentication
     USERNAME_FIELD = "email"

@@ -1,6 +1,9 @@
 <h1>Create Family</h1>
+{% comment %} Cand add action="" parameter and specify an other url : signifies that the data will be sent at the view corresponding to the given url {% endcomment %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create</button>
 </form>
+
+<a href="{% url 'family:family_list' %}" class="btn btn-primary">Go back to the family list</a>
