@@ -2,29 +2,29 @@ version: "3.8"
 services:
   api:
     build:
-      context: .
-    env_file:
+      context: . # Builds the Docker image using the current directory as the build context
+    env_file: # Loads environment variables from the .env file
       - .env
     volumes:
-      - ".:/app/"
+      - ".:/app/" #Mounts the project directory (.) to the /app/ directory inside the container
     ports:
-      - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+      - "8000:8000" # Maps port 8000 of the host machine to port 8000 of the container
+    command: python manage.py runserver 0.0.0.0:8000 # starts the Django development server
     stdin_open: true
     tty: true
-    shm_size: 2g
+    shm_size: 2g # shared memory size
     depends_on:
       - postgres
 
   postgres:
-    image: mdillon/postgis:11
-    shm_size: 2g
+    image: mdillon/postgis:11 # provides PostgreSQL with PostGIS extensions
+    shm_size: 2g # shared memory size
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: api
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data # store the postrgre data
 
 volumes:
   db-data:
