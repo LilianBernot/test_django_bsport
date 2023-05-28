@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Family
-from user.models import User
+from user.models import User, MyUserManager
 from .forms import FamilyForm, UserCreationForm, UserUpdateForm, FamilyUpdateForm
 # from .forms import ChildFormSet
 from django.contrib.auth.hashers import check_password
@@ -42,7 +42,7 @@ def create_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['password1'])
             return redirect('family:family_list') # to change with the unique identifier url of the user
     else:
         form = UserCreationForm()
