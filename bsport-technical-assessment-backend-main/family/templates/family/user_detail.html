@@ -1,1 +1,11 @@
-<h1>Email is {{ email }}</h1>
+<h1>User information</h1>
+{%  if user %}
+    <ul>
+        <li>Mail: {{user.email}}</li>
+        <li>Father: {{user.father}}</li>
+        <li>Mother: {{user.mother}}</li>
+        <li>...</li>
+    </ul>
+{%  else %}
+<p> User not found </p>
+{%  endif %}

@@ -41,14 +41,13 @@ def create_user(request):
 
 
 def user_detail(request, email):
-    # try: 
-    #    instance = User.objects.get(email=current_email)
-    #    return render(request,
-    #     'family/user_detail.html',
-    #     {'user': instance['email']}) 
-    # except:
-    #     return current_email
-    
-    return render(request,
-        'family/user_detail.html',
-        {'email': email}) 
+    try: 
+        # we get the corresponding User instance
+        instance =  User.objects.get(email = email)
+        return render(request,
+            'family/user_detail.html',
+            {'user': instance}) 
+    except:
+        return render(request,
+            'family/user_detail.html',
+            {'user': None}) 

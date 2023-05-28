@@ -30,3 +30,4 @@ Family :
 
 Can check a user on : 
 family/users/{email}
+Code to find it is really bad : when asking for User.objects.get(email=email), I have the error "" 'str' does not support 'get' "" o something close
