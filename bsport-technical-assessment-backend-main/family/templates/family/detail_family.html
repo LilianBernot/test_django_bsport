@@ -1,11 +1,19 @@
 <h1>Family information</h1>
-<p> Family : {{family}} </p>
 {%  if family %}
     <ul>
-        <li>Mail: {{family.user}}</li>
+        <li>User: {{family.user}}</li>
         <li>Father: {{family.father}}</li>
+        <li>Father relation rank : {{family.father_relationship_rank}}</li>
+
         <li>Mother: {{family.mother}}</li>
+        <li>Mother relation rank : {{family.mother_relationship_rank}}</li>
+
+        <li>Is user in relation: {{family.is_in_relationship}}</li>
+        <li>Partner: {{family.relationship}}</li>
+        <li>Child: {{family.child}}</li>
     </ul>
 {%  else %}
 <p> User not found </p>
 {%  endif %}
+
+<a href="{% url 'family:family_list' %}" class="btn btn-primary">Go to family lists</a>

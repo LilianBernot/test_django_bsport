@@ -1,4 +1,39 @@
-New model : 
+Use : 
+To launch the project, launch "docker-compose up".
+
+
+This project tries to answer the following constraints and tasks. A little comment has been written to describe what has been done : 
+
+Constraints :
+* A User have a father (nullable) 
+* A User have a mother (nullable) 
+* User can be in a relationship. Only user in a relationship can have children : user can have only one child (complication doing the form), if he says he has a child but is not in relationship, the form tells him it is impossible.
+* A User have, for mother and father (separately) a "relationship rank" from 1 to 5 : the ideal would be to develop the database described at the bottoom of the page. Currently, it is stored in the "Family" table as a simple int.
+* You can not touch the `user/` app, except for the relationship link.
+
+Tasks : 
+* Build the necessary model changes to store this new information : missing multiple children (only one child)
+* Add a viewset to add / edit children of couple of users.
+    * only the authenticated user can add/edit their children : can change it's relationship status, partner and child
+    * only `is_staff==True` users can add user without any parent : to do
+* Implement 100% coverage testing.
+
+
+To answer to the "authentication" problem, has been studied the auth module of Django but time has been missing to implement it.
+
+
+Here is the db model that has been developped : 
+
+Family : 
+- user : type User, PK 
+- mother / father : type User, FK
+- mother_relation_rank / fath... : type int
+- is_in_relationship : type Bool
+- relationship : type User, FK
+- child : type User, FK
+
+
+Model which would be the best to develop : 
 
 Family : 
 - user_id = primary key 
@@ -19,44 +54,6 @@ Relationship :
 - children_list_id = type User.id, foreign key. Set to null if in_relation = false
 
 
-At first, easy table : 
-Family : 
-- user : type User, PK 
-- mother / father : type User, FK
-- mother_relation_rank / fath... : type int
-- relationship : type User, FK
+The idea to build the "Parent" and "Relationship" tables is to be able to have "side-to"side" relation. For now, if we have a user id, we can have his parents and partner but the contrary is impossible. The proposed relational model would respect a good scheme.
 
 
-
-Can check a user on : 
-family/users/{email}
-
-
-Constraints :
-* A User have a father (nullable) : done
-* A User have a mother (nullable) : done
-* User can be in a relationship. Only user in a relationship can have children : user can have only one child for now (complication doing the form), if he says he has a child but is not in relationship, the form tells him it is impossible.
-* A User have, for mother and father (separately) a "relationship rank" from 1 to 5 : wouldlike to change the database but with a reduced model, done
-* You can not touch the `user/` app, except for the relationship link.
-
-Tasks : 
-* Build the necessary model changes to store this new information : missing multiple children (only one child)
-* Add a viewset to add / edit children of couple of users.
-    * only the authenticated user can add/edit their children : can change it's relationship status, partner child (multiple children left)
-    * only `is_staff==True` users can add user without any parent : to do
-* Implement 100% coverage testing.
-
-
-
-
-
-New reflexion : 
-- creation of user : we don't create a simple user. We create it directly with it's family, asking for it to announce (both) his parents. (both : should ask the client : ""only `is_staff==True` users can add user without any parent"" is it that initially, just need one parent ?)
-- for staff users : they can enter to the admin system. In this admin system, should be possible to modify the parents, create a family where the user has no parent
-
-To do : 
-- admin system : they can modify parents as they want but child rool stay active
-- update family : show the current elements
-- doing a proper login system : maybe using the same type of thing as the "admin" system of django, authentification. Using authenticate and login function of django.contrib.auth : problem, logs only to is_staff users -> question : why does the is_staff is beign an important element ? Nothing in the settings
-
-Need to ckeck on something : Family does not have USERNAME_FIELD but email is PK. What is a USERNME_FIELD ?
