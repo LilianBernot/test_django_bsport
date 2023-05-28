@@ -22,6 +22,7 @@ class FamilyForm(forms.ModelForm):
     
         return cleaned_data
 
+# trying to implement the multiple children aspect
 # class ChildForm(forms.Form):
 #     child = forms.ModelChoiceField(queryset=User.objects.all())
 
@@ -32,3 +33,9 @@ class UserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name')
+
+
+class UserUpdateForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput) # makes the password blank appear differently 
+    new_last_name = forms.CharField(max_length=255)

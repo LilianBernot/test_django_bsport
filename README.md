@@ -30,4 +30,21 @@ Family :
 
 Can check a user on : 
 family/users/{email}
-Code to find it is really bad : when asking for User.objects.get(email=email), I have the error "" 'str' does not support 'get' "" o something close
+Code to find it is really bad : when asking for User.objects.get(email=email), I have the error "" 'str' does not support 'get' "" or something close
+
+
+Constraints :
+
+* A User have a father (nullable) : done
+* A User have a mother (nullable) : done
+* User can be in a relationship. Only user in a relationship can have children : user can have only one child for now (complication doing the form), if he says he has a child but is not in relationship, the form tells him it is impossible.
+* A User have, for mother and father (separately) a "relationship rank" from 1 to 5 : wouldlike to change the database but with a reduced model, done
+* You can not touch the `user/` app, except for the relationship link.
+
+Tasks : 
+
+* Build the necessary model changes to store this new information : missing multiple children (only one child)
+* Add a viewset to add / edit children of couple of users.
+    * only the authenticated user can add/edit their children : to do
+    * only `is_staff==True` users can add user without any parent : to do
+* Implement 100% coverage testing.

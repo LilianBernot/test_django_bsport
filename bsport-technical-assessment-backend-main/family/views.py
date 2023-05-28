@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Family
 from user.models import User
-from .forms import FamilyForm, UserCreationForm
+from .forms import FamilyForm, UserCreationForm, UserUpdateForm
 # from .forms import ChildFormSet
+from django.contrib.auth.hashers import check_password
+
 
 # Create your views here.
 def family_list(request):
@@ -17,6 +19,7 @@ def family_create(request):
             form.save()
             return redirect('family:family_list')
 
+    # try to implement the multiple children aspect
         # formset = ChildFormSet(request.POST, prefix='children')
         # if form.is_valid() and formset.is_valid():
             # family = form.save()
@@ -57,3 +60,30 @@ def user_detail(request, email):
         return render(request,
             'family/user_detail.html',
             {'user': None}) 
+
+def user_update(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST) 
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            new_last_name = form.cleaned_data['new_last_name']
+
+            try:
+                user = User.objects.get(email=email) # we just verify that the password matches the email
+                if check_password(password, user.password): # Django hashes the passwords so we have to use one of its functions to compare them
+                    user.last_name = new_last_name
+                    user.save()
+                    return render(request,
+                        'family/user_detail.html',
+                        {'user': None}) 
+                else:
+                    form.add_error(None, 'Invalid password')
+            
+            except User.DoesNotExist:
+                form.add_error(None, 'Invalid email or password')
+    
+    else:
+        form = UserUpdateForm()
+    
+    return render(request, 'family/user_update.html', {'form': form})
