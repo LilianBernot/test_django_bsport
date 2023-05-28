@@ -25,3 +25,8 @@ Family :
 - mother / father : type User, FK
 - mother_relation_rank / fath... : type int
 - relationship : type User, FK
+
+
+
+Can check a user on : 
+family/users/{email}
