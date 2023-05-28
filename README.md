@@ -46,4 +46,18 @@ Tasks :
     * only `is_staff==True` users can add user without any parent : to do
 * Implement 100% coverage testing.
 
-New problem : family_list and user_detail seem not to work
+
+
+
+
+New reflexion : 
+- creation of user : we don't create a simple user. We create it directly with it's family, asking for it to announce (both) his parents. (both : should ask the client : ""only `is_staff==True` users can add user without any parent"" is it that initially, just need one parent ?)
+- for staff users : they can enter to the admin system. In this admin system, should be possible to modify the parents, create a family where the user has no parent
+
+To do : 
+- creation of user = creation of family 
+- users can only create themselves with parents 
+- landing page with "see users", "see specific user", "modify specific user", "see families", "modify one's family", "go to the admin system"
+- upgrade "see families" : for now, only parents
+- upgrade "see specific user" : add "go to family" button
+- admin system : they can modify parents as they want but child rool stay active

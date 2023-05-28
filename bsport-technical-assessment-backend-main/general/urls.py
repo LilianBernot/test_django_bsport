@@ -20,4 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls), # admin site where you can manage your Django project's data
     path("api-auth/", include("rest_framework.urls")), # URLs provided by the Django Rest Framework for authentication and authorization
     path("family/", include("family.urls")),
+    path("landing/", include("landing.urls")),
 ]

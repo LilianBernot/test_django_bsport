@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Family
-from user.models import User, MyUserManager
+from user.models import User
 from .forms import FamilyForm, UserCreationForm, UserUpdateForm, FamilyUpdateForm
 # from .forms import ChildFormSet
 from django.contrib.auth.hashers import check_password
 
 
-# Create your views here.
+# family related
 def family_list(request):
     families = Family.objects.all()
     return render(request, 'family/family_list.html', {'families': families})
@@ -38,6 +38,7 @@ def family_create(request):
     return render(request, 'family/family_create.html', {'form': form})
 
 
+# user related
 def create_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -61,6 +62,9 @@ def user_detail(request, email):
             'family/user_detail.html',
             {'user': None}) 
 
+
+
+# updates
 def user_update(request):
     if request.method == 'POST':
         form = UserUpdateForm(request.POST) 
