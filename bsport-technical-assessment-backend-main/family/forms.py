@@ -9,17 +9,18 @@ from django.contrib.auth.forms import UserCreationForm
 class FamilyForm(forms.ModelForm):
     class Meta:
         model = Family
-        fields = ['user', 'father', 'mother', 'father_relationship_rank', 'mother_relationship_rank', 'is_in_relationship', 'relationship', 'children']
+        fields = ['user', 'father', 'mother', 'father_relationship_rank', 'mother_relationship_rank', 'is_in_relationship', 'relationship', 'child']
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     is_in_relationship = cleaned_data.get('is_in_relationship')
-    #     children = cleaned_data.get('children')
+    # To avoid having a child if you're not in a relationship
+    def clean(self):
+        cleaned_data = super().clean()
+        is_in_relationship = cleaned_data.get('is_in_relationship')
+        children = cleaned_data.get('child')
 
-    #     if not is_in_relationship and children:
-    #         raise forms.ValidationError("Can't have children if not in a relationship.")
+        if not is_in_relationship and children:
+            raise forms.ValidationError("Can't have children if not in a relationship.")
     
-    #     return cleaned_data
+        return cleaned_data
 
 # class ChildForm(forms.Form):
 #     child = forms.ModelChoiceField(queryset=User.objects.all())
