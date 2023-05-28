@@ -11,6 +11,7 @@ urlpatterns = [
     path('users/<str:email>/', views.user_detail), # ajouter ce motif sous notre autre motif de groupes
     path('user_update/', views.user_update, name='user_update'),
     path('family_update/', views.family_update, name='family_update'),
+    path('new_create_user/', views.new_create_user, name='new_create_user'),
 
 
     # path('<int:pk>/', views.family_detail, name='family_detail'),
