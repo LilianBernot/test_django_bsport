@@ -38,4 +38,13 @@ class UserCreationForm(UserCreationForm):
 class UserUpdateForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput) # makes the password blank appear differently 
-    new_last_name = forms.CharField(max_length=255)
+    
+    new_last_name = forms.CharField(max_length=255, required=False)
+    new_first_name = forms.CharField(max_length=255, required=False)
+
+
+class FamilyUpdateForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput) # makes the password blank appear differently 
+    
+    new_child = forms.ModelChoiceField(queryset=User.objects.all())

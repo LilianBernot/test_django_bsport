@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Family
 from user.models import User
-from .forms import FamilyForm, UserCreationForm, UserUpdateForm
+from .forms import FamilyForm, UserCreationForm, UserUpdateForm, FamilyUpdateForm
 # from .forms import ChildFormSet
 from django.contrib.auth.hashers import check_password
 
@@ -67,12 +67,16 @@ def user_update(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            
             new_last_name = form.cleaned_data['new_last_name']
+            new_first_name = form.cleaned_data['new_first_name']
 
             try:
                 user = User.objects.get(email=email) # we just verify that the password matches the email
                 if check_password(password, user.password): # Django hashes the passwords so we have to use one of its functions to compare them
                     user.last_name = new_last_name
+                    user.first_name = new_first_name
+
                     user.save()
                     return render(request,
                         'family/user_detail.html',
@@ -87,3 +91,34 @@ def user_update(request):
         form = UserUpdateForm()
     
     return render(request, 'family/user_update.html', {'form': form})
+
+
+def family_update(request):
+    if request.method == 'POST':
+        form = FamilyUpdateForm(request.POST) 
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            
+            new_child = form.cleaned_data['new_child']
+
+            try:
+                user = User.objects.get(email=email) # we just verify that the password matches the email
+                
+                if check_password(password, user.password): # Django hashes the passwords so we have to use one of its functions to compare them
+                    family = Family.objects.get(user=user)
+                    family.child = new_child
+                    family.save()
+                    return render(request,
+                        'family/family_list.html',
+                        {'user': None}) 
+                else:
+                    form.add_error(None, 'Invalid password')
+            
+            except User.DoesNotExist:
+                form.add_error(None, 'Invalid email or password')
+    
+    else:
+        form = FamilyUpdateForm()
+    
+    return render(request, 'family/family_update.html', {'form': form})

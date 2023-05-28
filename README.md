@@ -45,6 +45,6 @@ Tasks :
 
 * Build the necessary model changes to store this new information : missing multiple children (only one child)
 * Add a viewset to add / edit children of couple of users.
-    * only the authenticated user can add/edit their children : to do
+    * only the authenticated user can add/edit their children : can change it's name. To add change in family
     * only `is_staff==True` users can add user without any parent : to do
 * Implement 100% coverage testing.
