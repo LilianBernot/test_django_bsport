@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import formset_factory
+# from django.forms import formset_factory
 from .models import Family
 
 from user.models import User
@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 class FamilyForm(forms.ModelForm):
     class Meta:
         model = Family
-        fields = ['user', 'father', 'mother', 'father_relationship_rank', 'mother_relationship_rank', 'is_in_relationship', 'relationship']
+        fields = ['user', 'father', 'mother', 'father_relationship_rank', 'mother_relationship_rank', 'is_in_relationship', 'relationship', 'children']
 
     # def clean(self):
     #     cleaned_data = super().clean()
@@ -21,10 +21,10 @@ class FamilyForm(forms.ModelForm):
     
     #     return cleaned_data
 
-class ChildForm(forms.Form):
-    child = forms.ModelChoiceField(queryset=User.objects.all())
+# class ChildForm(forms.Form):
+#     child = forms.ModelChoiceField(queryset=User.objects.all())
 
-ChildFormSet = formset_factory(ChildForm, extra=3)  # Set the initial number of child forms to 1
+# ChildFormSet = formset_factory(ChildForm, extra=3)  # Set the initial number of child forms to 1
 
 
 class UserCreationForm(UserCreationForm):

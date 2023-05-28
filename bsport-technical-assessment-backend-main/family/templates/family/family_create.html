@@ -4,7 +4,7 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    {{ formset.management_form }}
+    {% comment %} {{ formset.management_form }}
     <p>
         Are you in a relationship ? <button type="button" id="unlockButton">No</button> <span id="instruction">click on the button to change the status</span>
     </p>
@@ -12,14 +12,14 @@
         {% for child_form in formset %}
         {{ child_form }}
     {% endfor %}
-    </div>
+    </div> {% endcomment %}
 
     <button type="submit">Create</button>
 </form>
 
-<a href="{% url 'family:family_list' %}" class="btn btn-primary">Go back to the family list</a>
+{% comment %} <a href="{% url 'family:family_list' %}" class="btn btn-primary">Go back to the family list</a> {% endcomment %}
   
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
   // Hide the additional fields initially
@@ -32,4 +32,4 @@ $(document).ready(function() {
     $('#instruction').html("");
   });
 });
-</script>
+</script> {% endcomment %}

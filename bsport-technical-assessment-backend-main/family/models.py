@@ -31,5 +31,9 @@ class Family(models.Model):
     # ManyToManyField allows having multiple children who can be part of multiple families
     children = models.ManyToManyField(User, blank=True, related_name="children")
 
-    def __str__(self):
-        return self.user
+# for now we will just try to implement the thing with only one child
+    child = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="child")
+
+    # have to turn it into comment otherwise I can't delete a family
+    # def __str__(self):
+    #     return self.user
