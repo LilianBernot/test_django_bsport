@@ -53,7 +53,8 @@ def new_create_user(request):
     if request.method == 'POST':
         form = NewUserCreationForm(request.POST)
         if form.is_valid():
-            User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['password1'])
+            user = User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['password1'])
+            Family.objects.create_family(user, form.cleaned_data['father'], form.cleaned_data['mother'], form.cleaned_data['father_relationship_rank'], form.cleaned_data['mother_relationship_rank'], form.cleaned_data['is_in_relationship'], form.cleaned_data['relationship'], form.cleaned_data['child'])
             return redirect('family:family_list') # to change with the unique identifier url of the user
     else:
         form = NewUserCreationForm()

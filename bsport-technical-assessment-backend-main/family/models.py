@@ -1,8 +1,37 @@
 from django.db import models
 from user.models import User
+from django.contrib.auth.models import BaseUserManager
+
 
 # defines the characteristics of what we want to store
 # ORM : Object-Relational Mapping. Python classes get converted into tables directly : persistance is managed by Django
+
+class MyFamilyManager(BaseUserManager):
+    def create_family(self, user, father, mother, father_relationship_rank, mother_relationship_rank, is_in_relationship, relationship, child):
+        """
+        Creates and saves a Family with the given email, father, mother, father_relationship_rank, mother_relationship_rank, is_in_relationship, relationship, child
+        """
+
+        if not user:
+            raise ValueError("Users must have an email address")
+
+        user = self.model(
+            user=user,
+        )
+
+        user.father = father 
+        user.mother = mother 
+        user.father_relationship_rank = father_relationship_rank
+        user.mother_relationship_rank = mother_relationship_rank
+        
+        user.is_in_relationship = is_in_relationship
+        user.relationship = relationship
+        user.child = child
+
+        user.save(using=self._db)
+
+        return user
+
 
 # Create your models here.
 class Family(models.Model):
@@ -37,3 +66,5 @@ class Family(models.Model):
     # have to turn it into comment otherwise I can't delete a family
     # def __str__(self):
     #     return self.user
+
+    objects = MyFamilyManager()

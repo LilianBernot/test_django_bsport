@@ -61,3 +61,5 @@ To do :
 - upgrade "see families" : for now, only parents
 - upgrade "see specific user" : add "go to family" button
 - admin system : they can modify parents as they want but child rool stay active
+
+Need to ckeck on something : Family does not have USERNAME_FIELD
