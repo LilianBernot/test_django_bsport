@@ -9,7 +9,9 @@ from django.contrib.auth.hashers import check_password
 # family related
 def family_list(request):
     families = Family.objects.all()
-    return render(request, 'family/family_list.html', {'families': families})
+    for fam in families:
+        print(fam.user.email, fam.is_in_relationship)
+    return render(request, 'family/family_list.html', {'families': Family.objects.all()})
 
 
 def family_create(request):
@@ -58,7 +60,7 @@ def new_create_user(request):
             return redirect('family:family_list') # to change with the unique identifier url of the user
     else:
         form = NewUserCreationForm()
-    return render(request, 'family/create_user.html', {'form': form})
+    return render(request, 'family/new_create_user.html', {'form': form})
 
 
 def user_detail(request, email):

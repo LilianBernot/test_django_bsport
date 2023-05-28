@@ -3,10 +3,23 @@
 <ul>
     {% for family in families %}
         {% comment %} <li>Here will appear the families</li> {% endcomment %}
-        <li>{{ family.user }}, Father: {{ family.father }}, Mother: {{ family.mother }}</li>
+        <li>User : {{ family.user }} :</li>
+        <ul>
+            <li>Father: {{ family.father }}</li>
+            <li>Mother: {{ family.mother }}</li>
+            {%  if family.is_in_relationship %}
+                <ul>
+                    <li>Partner: {{ family.relationship }}</li>
+                    <li>Child : {{ family.child }}</li>
+                </ul>
+            {%  else %}
+            <p> No relationship </p>
+            {%  endif %}
+            
+        </ul>
     {% empty %}
         <li>No families found.</li>
     {% endfor %}
 </ul>
 
-<a href="{% url 'family:family_create' %}" class="btn btn-primary">Create Family</a>
+<a href="{% url 'family:family_update' %}" class="btn btn-primary">Update Family</a>
