@@ -40,15 +40,6 @@ class NewUserCreationForm(UserCreationForm):
         model = User
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name')
 
-        # fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'father', 'father_relationship_rank', 'mother', 'mother_relationship_rank', 'is_in_relationship', 'relationship', 'child')
-
-    # email = forms.EmailField()
-    # password1 = forms.CharField(widget=forms.PasswordInput, required=True) # makes the password blank appear differently 
-    # password2 = forms.CharField(widget=forms.PasswordInput, required=True) # makes the password blank appear differently 
-
-    # last_name = forms.CharField(max_length=255, required=False)
-    # first_name = forms.CharField(max_length=255, required=False)
-
     father = forms.ModelChoiceField(queryset=User.objects.all(), required=True)
     father_relationship_rank = forms.IntegerField(min_value=1, max_value=5, required=False)
     mother = forms.ModelChoiceField(queryset=User.objects.all(), required=True)
@@ -67,6 +58,7 @@ class NewUserCreationForm(UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords do not match.")
         
+        # verifying the father and mother are given
         father = cleaned_data.get('father')
         mother = cleaned_data.get('mother') 
         if not father or not mother:
@@ -93,4 +85,6 @@ class FamilyUpdateForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput) # makes the password blank appear differently 
     
-    new_child = forms.ModelChoiceField(queryset=User.objects.all())
+    new_status = forms.BooleanField(required=False)
+    new_relationship = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
+    new_child = forms.ModelChoiceField(queryset=User.objects.all(), required=False)

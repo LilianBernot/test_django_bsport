@@ -5,7 +5,11 @@
 <body>
     <h1>Welcome to the Landing Page!</h1>
     <p>Please select an option:</p>
-    <a href="{% url 'landing:login' %}">Login</a>
-    <a href="{% url 'family:new_create_user' %}">Sign Up</a>
+    <ul>
+        <li> <a href="{% url 'landing:login' %}">Login</a> </li>
+        <li> <a href="{% url 'family:new_create_user' %}">Sign Up</a> </li>
+        <li> <a href="{% url 'family:family_list' %}">See current families</a> </li>
+        <li> <a href="{% url 'admin:index' %}">Admin site</a> </li>
+    </ul>    
 </body>
 </html>

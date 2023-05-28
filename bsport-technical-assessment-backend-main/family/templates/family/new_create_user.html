@@ -3,4 +3,5 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create User</button>
+    <a href="{% url 'landing:landing' %}" class="btn btn-primary">Go back to landing page</a>
 </form>

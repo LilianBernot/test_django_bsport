@@ -55,11 +55,8 @@ New reflexion :
 - for staff users : they can enter to the admin system. In this admin system, should be possible to modify the parents, create a family where the user has no parent
 
 To do : 
-- creation of user = creation of family 
-- users can only create themselves with parents 
-- landing page with "see users", "see specific user", "modify specific user", "see families", "modify one's family", "go to the admin system"
-- upgrade "see families" : for now, only parents
 - upgrade "see specific user" : add "go to family" button
 - admin system : they can modify parents as they want but child rool stay active
+- update family : show the current elements
 
 Need to ckeck on something : Family does not have USERNAME_FIELD

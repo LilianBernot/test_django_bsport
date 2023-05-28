@@ -4,18 +4,24 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    {% comment %} {{ formset.management_form }}
-    <p>
-        Are you in a relationship ? <button type="button" id="unlockButton">No</button> <span id="instruction">click on the button to change the status</span>
-    </p>
-    <div id="additionalFields">
-        {% for child_form in formset %}
-        {{ child_form }}
-    {% endfor %}
-    </div> {% endcomment %}
 
     <button type="submit">Create</button>
 </form>
+
+
+{% comment %} Trying to add multiple children {% endcomment %}
+
+{% comment %} {{ formset.management_form }}
+<p>
+    Are you in a relationship ? <button type="button" id="unlockButton">No</button> <span id="instruction">click on the button to change the status</span>
+</p>
+<div id="additionalFields">
+    {% for child_form in formset %}
+    {{ child_form }}
+{% endfor %}
+</div> {% endcomment %}
+
+
 
 {% comment %} <a href="{% url 'family:family_list' %}" class="btn btn-primary">Go back to the family list</a> {% endcomment %}
   
