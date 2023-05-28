@@ -5,12 +5,15 @@
     {{ form.as_p }}
 
     {{ formset.management_form }}
-    <div id="child-forms">
+    <p>
+        Are you in a relationship ? <button type="button" id="unlockButton">No</button> <span id="instruction">click on the button to change the status</span>
+    </p>
+    <div id="additionalFields">
         {% for child_form in formset %}
-            {{ child_form }}
-        {% endfor %}
+        {{ child_form }}
+    {% endfor %}
     </div>
-    <button type="button" id="add-child-btn">Add Child</button>
+
     <button type="submit">Create</button>
 </form>
 
@@ -19,27 +22,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-$('#add-child-btn').click(function() {
-    var formCount = $('#id_form-TOTAL_FORMS').val();  // Get the current form count
-    var newChildForm = $('.child-form:last').clone();  // Clone the last child form
-    newChildForm.find(':input').val('');  // Clear the input values in the cloned form
-    newChildForm.find('label').attr('for', function() {
-    // Update the 'for' attribute of labels to avoid conflicts
-    return $(this).attr('for').replace(/(\d+)/, function(match, number) {
-        return Number(number) + 1;  // Increment the number
-    });
-    });
-    newChildForm.find(':input').attr('id', function() {
-    // Update the 'id' attribute of inputs to avoid conflicts
-    return $(this).attr('id').replace(/(\d+)/, function(match, number) {
-        return Number(number) + 1;  // Increment the number
-    });
-    });
-    newChildForm.find('input[name="form-TOTAL_FORMS"]').attr('value', function() {
-    // Update the 'value' attribute of the management form
-    return Number(formCount) + 1;  // Increment the form count
-    });
-    $('#child-forms').append(newChildForm);  // Append the cloned form to the container
-});
+  // Hide the additional fields initially
+  $('#additionalFields').hide();
+
+  // Show additional fields when the button is clicked
+  $('#unlockButton').click(function() {
+    $('#additionalFields').show();
+    $(this).html('Yes');
+    $('#instruction').html("");
+  });
 });
 </script>
