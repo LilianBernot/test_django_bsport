@@ -6,8 +6,9 @@
     <h1>Welcome to the Landing Page!</h1>
     <p>Please select an option:</p>
     <ul>
-        <li> <a href="{% url 'landing:login' %}">Login</a> </li>
-        <li> <a href="{% url 'family:new_create_user' %}">Sign Up</a> </li>
+        {% comment %} We don't put this option which is useless because it is the same as going to the admin site {% endcomment %}
+        {% comment %} <li> <a href="{% url 'landing:login' %}">Login</a> </li> {% endcomment %} 
+        <li> <a href="{% url 'family:create_user' %}">Sign Up</a> </li>
         <li> <a href="{% url 'family:family_list' %}">See current families</a> </li>
         <li> <a href="{% url 'admin:index' %}">Admin site</a> </li>
     </ul>    

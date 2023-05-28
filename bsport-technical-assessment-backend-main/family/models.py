@@ -68,3 +68,6 @@ class Family(models.Model):
     #     return self.user
 
     objects = MyFamilyManager()
+
+# maybe will help to find the family
+    USERNAME_FIELD = "user" 

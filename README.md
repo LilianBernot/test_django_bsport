@@ -42,7 +42,7 @@ Constraints :
 Tasks : 
 * Build the necessary model changes to store this new information : missing multiple children (only one child)
 * Add a viewset to add / edit children of couple of users.
-    * only the authenticated user can add/edit their children : can change it's name and child (multiple children left)
+    * only the authenticated user can add/edit their children : can change it's relationship status, partner child (multiple children left)
     * only `is_staff==True` users can add user without any parent : to do
 * Implement 100% coverage testing.
 
@@ -55,8 +55,8 @@ New reflexion :
 - for staff users : they can enter to the admin system. In this admin system, should be possible to modify the parents, create a family where the user has no parent
 
 To do : 
-- upgrade "see specific user" : add "go to family" button
 - admin system : they can modify parents as they want but child rool stay active
 - update family : show the current elements
+- doing a proper login system : maybe using the same type of thing as the "admin" system of django, authentification. Using authenticate and login function of django.contrib.auth : problem, logs only to is_staff users -> question : why does the is_staff is beign an important element ? Nothing in the settings
 
-Need to ckeck on something : Family does not have USERNAME_FIELD
+Need to ckeck on something : Family does not have USERNAME_FIELD but email is PK. What is a USERNME_FIELD ?

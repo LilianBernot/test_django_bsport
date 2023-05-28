@@ -1,0 +1,11 @@
+<h1>Family information</h1>
+<p> Family : {{family}} </p>
+{%  if family %}
+    <ul>
+        <li>Mail: {{family.user}}</li>
+        <li>Father: {{family.father}}</li>
+        <li>Mother: {{family.mother}}</li>
+    </ul>
+{%  else %}
+<p> User not found </p>
+{%  endif %}

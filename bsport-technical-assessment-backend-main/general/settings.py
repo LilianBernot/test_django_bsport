@@ -136,3 +136,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
+
+# when loging in, this is the url to which is sent the user
+LOGIN_REDIRECT_URL = "family:family_list"
